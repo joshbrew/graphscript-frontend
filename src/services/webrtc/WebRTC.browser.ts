@@ -361,6 +361,7 @@ export class WebRTCfrontend extends Service {
     receiveCallInformation = async ( options:WebRTCProps ) => {
         if(!options._id) options._id = `rtc${Math.floor(Math.random()*1000000000000000)}`;
         if (this.rtc[options._id]) {
+            //if(!this.unanswered[options._id])  //calling ourselves in this case
             if(options.candidates) {
                 for(const key in options.candidates) 
                    this.addIceCandidate(this.rtc[options._id].rtc, options.candidates[key]);
@@ -562,6 +563,44 @@ export class WebRTCfrontend extends Service {
         options?:RTCDataChannelInit//{ negotiated: false }
     ) => {
         return rtc.createDataChannel(name,options);
+    }
+
+    listMediaDevices() {
+        return new Promise((res,rej) => {
+            navigator.mediaDevices.enumerateDevices()
+            .then((deviceInfos) => { //https://github.com/garrettmflynn/intensities/blob/main/app/index.js
+                let ain = [] as any[]; let aout = [] as any[]; let cam = [] as any[];
+                for (var i = 0; i !== deviceInfos.length; ++i) {
+                    var deviceInfo = deviceInfos[i];
+                    var option = deviceInfo;
+                    if (deviceInfo.kind === 'videoinput') {
+                        if(!state.data.selectedVideo) {
+                            state.setState({selectedVideo:deviceInfo.kind});
+                        }
+                        cam.push(option);
+                    }
+                    else if (deviceInfo.kind === 'audioinput') {
+                        if(!state.data.selectedAudioIn) {
+                            state.setState({selectedAudioIn:deviceInfo.kind});
+                        }
+                        ain.push(option);
+                    } 
+                    else if (deviceInfo.kind === 'audiooutput') {
+                        if(!state.data.selectedAudioOut) {
+                            state.setState({selectedAudioOut:deviceInfo.kind});
+                        }
+                        aout.push(option);
+                    } 
+                }
+    
+                res({
+                    audioInDevices:ain,
+                    audioOutDevices:aout,
+                    cameraDevices:cam
+                });
+    
+            }).catch(rej);;
+        });
     }
 
     enableAudio = async (call:WebRTCInfo, audioOptions:boolean|(MediaTrackConstraints & {deviceId?:string})=true) => {

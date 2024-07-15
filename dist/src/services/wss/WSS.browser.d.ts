@@ -57,7 +57,7 @@ export declare class WSSfrontend extends Service {
                 request: (message: any, method?: string) => Promise<any>;
                 post: (route: any, args?: any) => void;
                 run: (route: any, args?: any, method?: string) => Promise<any>;
-                subscribe: (route: any, callback?: string | ((res: any) => void), args?: any[], key?: string, subInput?: boolean) => any;
+                subscribe: (route: any, callback?: ((res: any) => void) | string, args?: any[], key?: string, subInput?: boolean) => any;
                 unsubscribe: (route: any, sub: number) => Promise<boolean>;
                 terminate: () => boolean;
                 _id?: string;
@@ -68,7 +68,7 @@ export declare class WSSfrontend extends Service {
                 port: number;
                 path?: string;
                 debug?: boolean;
-                onmessage?: (data: string | ArrayBufferView | ArrayBufferLike | Blob, ws: WebSocket, wsinfo: WebSocketInfo) => void;
+                onmessage?: (data: string | ArrayBufferLike | Blob | ArrayBufferView, ws: WebSocket, wsinfo: WebSocketInfo) => void;
                 onopen?: (ev: any, ws: WebSocket, wsinfo: WebSocketInfo) => void;
                 onclose?: (ev: any, ws: WebSocket, wsinfo: WebSocketInfo) => void;
                 onerror?: (ev: any, ws: WebSocket, wsinfo: WebSocketInfo) => void;

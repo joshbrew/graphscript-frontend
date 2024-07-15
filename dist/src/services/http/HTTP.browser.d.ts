@@ -23,6 +23,6 @@ export declare class HTTPfrontend extends Service {
     POST: (message: any | ServiceMessage, url?: string | URL, type?: XMLHttpRequestResponseType, mimeType?: string | undefined) => Promise<unknown>;
     transmit: (message: any | ServiceMessage, url: string | URL) => Promise<unknown>;
     transponder: (url: string | URL, message: any | ServiceMessage | undefined, type?: XMLHttpRequestResponseType, mimeType?: string) => Promise<unknown>;
-    listen: (path?: string | undefined | '0', fetched?: (clone: Response, args: any[], response: Response) => Promise<void>) => string;
+    listen: (path?: string | undefined | "0", fetched?: (clone: Response, args: any[], response: Response) => Promise<void>) => string;
     stopListening: (path: string | 0 | undefined, listener?: string) => void;
 }

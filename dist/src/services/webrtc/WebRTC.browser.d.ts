@@ -79,15 +79,16 @@ export declare class WebRTCfrontend extends Service {
     createStream: (options: {
         [key: string]: {
             track: MediaStreamTrack | MediaTrackConstraints;
-            onended: (ev) => void;
-            onmute: (ev) => void;
-            onunmute: (ev) => void;
+            onended: (ev: any) => void;
+            onmute: (ev: any) => void;
+            onunmute: (ev: any) => void;
         };
     }) => MediaStream;
     addUserMedia: (rtc: RTCPeerConnection, options?: MediaStreamConstraints, info?: WebRTCInfo) => Promise<unknown>;
     addTrack: (rtc: RTCPeerConnection, track: MediaStreamTrack, stream: MediaStream) => RTCRtpSender;
     removeTrack: (rtc: RTCPeerConnection, sender: RTCRtpSender) => boolean;
     addDataChannel: (rtc: RTCPeerConnection, name: string, options?: RTCDataChannelInit) => RTCDataChannel;
+    listMediaDevices(): Promise<unknown>;
     enableAudio: (call: WebRTCInfo, audioOptions?: boolean | (MediaTrackConstraints & {
         deviceId?: string;
     })) => Promise<unknown>;
