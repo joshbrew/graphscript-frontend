@@ -1,6 +1,6 @@
 {
     "name": "graphscript-frontend",
-    "version": "0.3.14",
+    "version": "0.3.29",
     "description": "Comprehensive acyclic-graph based application architecture with microservices and networking",
     "main": "dist/index.js",
     "module": "dist/index.esm.js",
@@ -23,7 +23,7 @@
     "author": "Joshua Brewster",
     "license": "LGPL-3.0-or-later",
     "devDependencies": {
-        "graphscript-core": "~0.3.4",
+        "graphscript-core": "~0.3.6",
         "@types/node": "~18.7.15"
     },
     "nodemonConfig": {
